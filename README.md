@@ -1,68 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Capstone 2 Proposal - Ski Guide App
+Match yourself with local skiers whenever you’re skiing. Enter skill-level and get matched with a local skier who will show you around the slopes. Could possibly grow into a system where transactions are made too, guides enter how much they charge for a day or half-day, and then a review system as well. 
 
-## Available Scripts
+When you visit the site, you can enter dates and location for your trip, duration for the class, skill level and what type of skiing you want to do. The page will search for guides in that area who are available and the user can request to book them. 
 
-In the project directory, you can run:
+If you’re a guide you can register and enter information about yourself, and availability, in order to be matched with a skier. 
 
-### `yarn start`
+## Data
+The site will use this API:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+https://developer.weatherunlocked.com/documentation/skiresort
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+1. I will use React and Node for this project. 
+2. I’m going to make an evenly focused full-stack application.
+3. This will be a website, but it should also look good on mobile.
+4. The goal will be to build a website which can match local skiers with tourists visiting who wish to learn the slopes from a local.
+5. Skiers, and snowboarders. Basically people who want to guide others (and eventually make money doing so) and people who wish to learn about the ski system they’re going to from locals.
+6. I will use https://developer.weatherunlocked.com/documentation/skiresort to provide snow reports. Moreover, I will build a backend with CRUD functionality in order for users to be able to register etc.
+7. I will have a table for skiers, one for guides, and one for reservations. Skiers and guides will be linked through reservations, but skiers will also be able to favorite guides.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
