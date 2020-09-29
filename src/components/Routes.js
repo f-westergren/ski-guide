@@ -1,30 +1,43 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'; 
-import { Grid } from '@material-ui/core';
-import GuideList from './GuideList';
-import Search from './Search';
-import Header from './Header';
 import NotFound from './NotFound';
+import Search from './Search';
+import NavBar from './NavBar';
+import Guide from './Guide';
+import Login from './Login';
+import Profile from './Profile'
+import MessageList from './MessageList';
+import { AuthContext } from './context/auth';
+import ReservationList from './ReservationList';
 
 const Routes = () => {
+  const existingToken = localStorage.getItem('token')
+  const [authToken, setAuthToken] = useState(existingToken);
+
+  const setToken = (token) => {
+    if (!token) {
+      localStorage.removeItem('token')
+    } else {
+      localStorage.setItem('token', token);
+    }
+    setAuthToken(token)
+  }
   return (
-    <BrowserRouter>
-      <Grid container direction="column">
-        <Grid item>
-          <Header />
-        </Grid>
-        <Grid item container>
-          <Grid xs={false} sm={2} />
-          <Grid item xs={12} sm={8}>
-            <Switch>
-              <Route exact path="/guides" component={GuideList} />
-              <Route component={NotFound} />
-            </Switch>
-          </Grid>
-          <Grid xs={false} sm={2} />
-        </Grid>
-      </Grid>
-    </BrowserRouter>
+    <AuthContext.Provider value={{ authToken, setAuthToken: setToken }}>
+      <BrowserRouter>
+        <NavBar />
+          <Switch>
+            <Route exact path="/" component={Search} />
+            <Route exact path="/guides/:id" component={Guide} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/messages" component={MessageList} />
+            <Route exact path="/reservations" component={ReservationList} />
+
+            <Route exact path="/login" component={Login} />
+            <Route component={NotFound} />
+          </Switch>
+      </BrowserRouter>
+    </AuthContext.Provider>
   )
 }
 
