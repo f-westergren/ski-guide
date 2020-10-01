@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import {
   ButtonGroup,
   Button, 
@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import SkiGuideApi from '../SkiGuideApi';
 import { useAuth } from './context/auth';
+import getFromToken from '../utils';
 
 const Login = () => {
   let initialState = {
@@ -19,7 +20,6 @@ const Login = () => {
     'password': '', 
     'first_name': '', 
     'last_name': '',
-    'location': '',
     'skill_level': '',
     'image_url': ''
   }
@@ -27,9 +27,10 @@ const Login = () => {
   const [formData, setFormData] = useState(initialState);
   const [rSelected, setRSelected] = useState('login');
   const [isError, setIsError] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { setAuthToken } = useAuth();
+  const { authToken, setAuthToken } = useAuth();
+  const history = useHistory();
 
+  const user = getFromToken(authToken, 'id');
   const fields = rSelected === 'login' ? ['email', 'password'] : Object.keys(initialState);
 
   const handleChange = e => {
@@ -47,18 +48,18 @@ const Login = () => {
       if (rSelected === 'login') {
         res = await SkiGuideApi.login(formData.email, formData.password);
       } else if (rSelected === 'signup') {
-        res = await SkiGuideApi.register(formData);
+        res = await SkiGuideApi.registerUser(formData);
       }
       setAuthToken(res.token);
-      setIsLoggedIn(true);
+      history.push('/')  
     } catch(err) {
       setIsError(true)
     }
   }
 
-    if (isLoggedIn) {
-      return <Redirect to="/" />
-    }
+  if(user) {
+    return <Redirect to="/" />
+  }
 
     return (
       <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
 import SkiGuideApi from '../SkiGuideApi';
 
-const MessageModal = ({ id }) => {
+const MessageModal = ({ btnText, id }) => {
   const [message, setMessage] = useState('')
   const [isError, setIsError] = useState(false);
   const [modal, setModal] = useState(false);
@@ -30,7 +30,7 @@ const MessageModal = ({ id }) => {
   
   return(
     <>
-    <Button className="text-uppercase float-right ml-2" color="success" onClick={toggle}>Message</Button>
+    <Button className="text-uppercase" color="success" onClick={toggle}>{btnText}</Button>
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader>
         Create Message

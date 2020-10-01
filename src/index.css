@@ -14,10 +14,15 @@ code {
     monospace;
 }
 
+.main-container {
+  background-color: #FFFAFA;
+  border-radius: 10px;
+}
+
 .search {
   position: absolute;
   top: 5rem;
-  left: 50%;
+  left: 5rem;
   transform: translateX(-50%);
   width: 100%;
   max-width: 400px;
@@ -60,4 +65,13 @@ code {
 
 .thumbnail {
   border-radius: 50%;
+}
+
+.guide-image {
+  max-height: 400px;
+  border-radius: 10px;
+}
+
+.guide-info {
+  list-style-type: none;
 }

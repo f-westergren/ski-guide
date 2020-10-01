@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Spinner } from 'reactstrap';
   import SkiGuideApi from '../SkiGuideApi';
   import { useAuth } from './context/auth';
-  import getIdFromToken from '../utils';
+  import getFromToken from '../utils';
   import MessageCard from './MessageCard';
 
 const MessageList = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [messages, setMessages] = useState([])
 
   const { authToken } = useAuth();
 
-  const userId = getIdFromToken(authToken)
+  const userId = getFromToken(authToken, 'id')
 
   useEffect(() => {
     const getMessages = async () => {
@@ -21,24 +21,12 @@ const MessageList = () => {
         setMessages(res)
         setIsLoading(false);
       } catch (err) {
-        setError(true)
+        setIsError(true)
         setIsLoading(false);
       }
     }
     getMessages()
   }, [userId])
-
-  // const handleSubmit = async e => {
-  //   e.preventDefault()
-  //     try {
-  //       console.log("THINGS", userId, formData)
-  //       await SkiGuideApi.update(userId, formData)
-  //       setIsUpdating(false)
-  //     } catch (err) {
-  //       err[0] === 'Invalid Credentials' ? setError(err[0]) : setError('Invalid or missing input')
-  //       setTimeout(function(){ setError(false) }, 3000);
-  //     }
-  // }
   
   if (isLoading) {
     return (
@@ -49,16 +37,16 @@ const MessageList = () => {
     )
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div className="text-center mt-5">
-        <p>Can't load user.</p>
+        <p>Can't load messages right now.</p>
       </div>
     )
   }
 
   return (
-    <Container className='profile mt-5 p-4' style={{ backgroundColor: '#fff',  borderRadius: '10px' }}>
+    <Container className='profile mt-5 p-4 main-container'>
       <Row>
         <Col>
         <h2 className="text-center">Inbox</h2>
@@ -69,6 +57,7 @@ const MessageList = () => {
           <h4>Received</h4>
         </Col>
       </Row>
+      {!messages.received.length && <p>No messages.</p>}
       {messages.received.map(message => (
         <Row>
         <Col>
@@ -84,7 +73,8 @@ const MessageList = () => {
         <Col>
           <h4>Sent</h4>
         </Col>
-      </Row>      
+      </Row>
+      {!messages.sent.length && <p>No messages.</p>}      
       {messages.sent.map(message => (
         <Row>
         <Col>

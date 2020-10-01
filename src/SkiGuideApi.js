@@ -19,57 +19,67 @@ class SkiGuideApi {
   }
 
   static async login(email, password) {
-    let res = await this.request('login', { email, password }, 'post');
+    const res = await this.request('login', { email, password }, 'post');
     return res;
   }
   
   static async getUser(id) {
-    let res = await this.request(`users/${id}`);
+    const res = await this.request(`users/${id}`);
     return res;
   }
 
-  static async register(data) {
-    let res = await this.request('users', data, 'post');
+  static async registerUser(data) {
+    const res = await this.request('users', data, 'post');
     return res;
   }
 
-  static async update(id, data) {
-    let res = await this.request(`users/${id}`, data, 'patch');
+  static async updateUser(id, data) {
+    const res = await this.request(`users/${id}`, data, 'patch');
     return res;
   }
 
   static async getGuide(id) {
-    let res = await this.request(`guides/${id}`);
+    const res = await this.request(`guides/${id}`);
     return res.guide;
   }
 
   static async getGuides(data) {
-    let res = await this.request('guides', data);
+    const res = await this.request('guides', data);
+    return res;
+  }
+
+  static async registerGuide(data) {
+    const res = await this.request('guides', data, 'post');
+    return res;
+  }
+
+  static async updateGuide(id, data) {
+    const res = await this.request(`guides/${id}`, data, 'patch');
     return res;
   }
 
   static async getMessages() {
-    let res = await this.request('messages');
+    const res = await this.request('messages');
     return res;
   }
 
   static async newMessage(data) {
-    let res = await this.request('messages', data, 'post');
+    const res = await this.request('messages', data, 'post');
     return res;
   }
 
   static async getReservations() {
-    let res = await this.request('reservations');
+    const res = await this.request('reservations');
     return res;
   }
 
   static async newReservation(data) {
-    let res = await this.request('reservations', data, 'post')
+    const res = await this.request('reservations', data, 'post')
     return res;
   }
 
   static async getWeather(lat, lon) {
-    let res = await this.request('weather/today', {lat, lon})
+    const res = await this.request('weather/today', {lat, lon})
     return res;
   }
 

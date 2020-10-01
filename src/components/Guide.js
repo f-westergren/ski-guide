@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card, CardBody, CardImg, Button, Spinner} from 'reactstrap';
+import { Container, Col, Row, Button, Spinner} from 'reactstrap';
 import MessageModal from './MessageModal';
 import SkiGuideApi from '../SkiGuideApi';
 
@@ -27,7 +27,7 @@ const Guide = () => {
       await SkiGuideApi.newReservation({ guide_id: id })
       setReserved(true);
     } catch (err) {
-      console.log(err);
+      setIsError(err);
     }
   }
 
@@ -51,15 +51,28 @@ const Guide = () => {
   }
 
   return (
-    <div className="container">
-      <Card className="mt-4">
-       <CardImg top width="100%" src="https://bit.ly/335Iqm0" alt="Card image cap" />
-        <CardBody>
-          <h6 className="d-flex justify-content-between">{`${guide.first_name} ${guide.last_name}`}</h6>
-          <div>Location: {guide.location}</div>
-          <div>Snow Vehicle: {guide.type.join(', ')}</div>
-          <div>Bio: {guide.bio}</div>
-          <div>Rating: {guide.avg ? `${guide.avg}/5` : 'No reviews yet'}</div> 
+    <Container className="main-container mt-5 p-4">
+      <Row>
+        <Col className="text-center">
+          <h4>{`${guide.first_name} ${guide.last_name}`}</h4>
+          <br />
+          <img 
+            className="guide-image" 
+            src={guide.image_url || "https://bit.ly/335Iqm0"} 
+            alt="Card image cap" 
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+        <br />
+        <ul className='guide-info'>
+          <li><b>Location</b>: {guide.location}</li>
+          <li><b>Snow Vehicle</b>: {guide.type.join(', ')}</li>
+          <li><b>Bio</b>: {guide.bio}</li>
+          <li><b>Rating</b>: {guide.avg ? `${guide.avg}/5` : 'No reviews yet'}</li>
+        </ul>
+          <br />
           <Button 
             className="text-uppercase float-right ml-2"
             id={guide.id}
@@ -74,12 +87,11 @@ const Guide = () => {
           >
             {reserved ? 'Request sent' : 'Request to Book'}
           </Button>
-          <MessageModal id={id} />
-          
-        </CardBody>
-      </Card>
-    
-  </div>
+          <MessageModal id={id} btnText='Message' />
+        </Col>
+
+      </Row>
+  </Container>
   )
 }
 

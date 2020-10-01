@@ -8,8 +8,6 @@ const ReservationList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-
-
   useEffect(() => {
     const getReservations = async () => {
       try {
@@ -17,7 +15,6 @@ const ReservationList = () => {
         setIsLoading(false);
         setReservations(result);
       } catch (err) {
-        console.log(err)
         setIsError(true);
         setIsLoading(false);
       }
@@ -33,14 +30,15 @@ const ReservationList = () => {
       </div>
     );
   }
-  console.log(reservations.asUser)
   if (isError) {
     return (
       <h4 className="text-white text-center mt-5">Can't get reservations.</h4>
     )
   }
   return (
-    <Container className='profile mt-5 p-4' style={{ backgroundColor: '#fff',  borderRadius: '10px' }}>
+    <Container className='profile mt-5 p-4 main-container'>
+      <h2 className="text-center">Reservations</h2>
+      {!reservations.length && <p className="text-center">You have no reservations :(</p>}
       {reservations.asUser && reservations.asUser.map(res => (
         <ReservationCard 
           guide_id={res.guide_id}

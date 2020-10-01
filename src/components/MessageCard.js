@@ -1,7 +1,10 @@
-import React from 'react';
-import { Card, CardBody, Button } from 'reactstrap';
+import React, { useState } from 'react';
+import { Card, CardBody } from 'reactstrap';
+import MessageModal from './MessageModal';
 
-const GuideCard = ({ id, content, time_stamp, first_name, image_url, sent=false }) => {
+const MessageCard = ({ from_id, content, time_stamp, first_name, image_url, sent=true }) => {
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   const dateTime = new Date(time_stamp).toString().slice(0, 24) //Format date and remove timezone
   
@@ -18,19 +21,13 @@ const GuideCard = ({ id, content, time_stamp, first_name, image_url, sent=false 
             alt={`${first_name}`} 
           />  
         </h6>
-        <span>{content}</span>
-        {!sent && 
-          <Button 
-            className="float-right" 
-            color="primary"
-            onClick=""
-          >
-            Reply
-          </Button>
-        }        
+        <p>{content}</p>  
+        <br />
+        {!sent && <MessageModal id={from_id} btnText='Reply' />}
       </CardBody>
+        
     </Card>
   )
 }
 
-export default GuideCard
+export default MessageCard
