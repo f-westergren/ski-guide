@@ -1,35 +1,22 @@
 import React, { useState } from 'react';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from 'react-places-autocomplete';
-import { Col, Row, Button, Form, FormGroup, Input } from 'reactstrap';
+import { Col, Row, Button, Form, FormGroup, Input, Container } from 'reactstrap';
 import SkiGuideApi from '../SkiGuideApi';
 import GuideList from './GuideList';
 import WeatherCard from './WeatherCard';
+import AutoCompleteSearch from './AutoCompleteSearch';
 
 const Search = () => {
   const [guides, setGuides] = useState(['start']);
   const [isError, setIsError] = useState(false);
-  const [address, setAddress] = useState('');
-  const [coordinates, setCoordinates] = useState({ lat: 37.9374939, lng: -107.8122852 })
+  const [autoCompleteData, setAutoCompleteData] = useState({})
 
-  const handleSelect = async (value) => {
-    try {
-      const results = await geocodeByAddress(value);
-      const latLng = await getLatLng(results[0]);
-      setAddress(value);
-      setCoordinates(latLng);
-    } catch(err) {
-      console.log('ERROR', err)
-    }
-
-  }
+  const addAutoCompleteData = (data) => setAutoCompleteData(data)
+  console.log('COORDINATES')
 
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const result = await SkiGuideApi.getGuides({ latitude: coordinates.lat, longitude: coordinates.lng })
+      const result = await SkiGuideApi.getGuides(autoCompleteData)
       setGuides(result.guides)
     } catch (err) {
       setIsError(true);
@@ -38,45 +25,21 @@ const Search = () => {
 
   return (
     <div className="background">
-      <div className="container mt-3">
-      <Row>
+            <Row className="mt-5">
+        <Col />
         <Col />
         <Col>
-          <WeatherCard latitude={coordinates.lat} longitude={coordinates.lng} />
+          <WeatherCard lat={autoCompleteData.lat || 37.9} lng={autoCompleteData.lng || -107.8} />
         </Col>
         <Col />
+        <Col />
       </Row>
+      <Container className="main-container p-4 mt-5">
       <Form className="mt-4" onSubmit={handleSubmit}>
         <Row form>
-        <Col md={6}>
+          <Col md={6}>
             <FormGroup>
-              <PlacesAutocomplete 
-                value={address} 
-                onChange={setAddress} 
-                onSelect={handleSelect}
-              >{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                <>
-                  <Input 
-                    type="search"
-                    name="search"
-                    id="search"
-                    required
-                    {...getInputProps({ placeholder: "Enter location" })} />
-                  <div>
-                    {loading ? <div>...loading</div> : null}
-                    {suggestions.map((suggestion) => {
-                      const style = suggestion.active 
-                        ? { backgroundColor: "#41b6e6", cursor: "pointer" } 
-                        : { backgroundColor: "#fff", cursor: "pointer" }           
-                      return <div 
-                        {...getSuggestionItemProps(suggestion, { style })} 
-                        key={suggestion.placeId}>{suggestion.description}
-                      </div>
-                    })}
-                  </div>
-                </>
-              )}
-              </PlacesAutocomplete>
+              <AutoCompleteSearch addAutoCompleteData={addAutoCompleteData} />
             </FormGroup>
           </Col>
           <Col md={5}>
@@ -92,11 +55,11 @@ const Search = () => {
       </Form>
         
       {guides.length === 0 && 
-        <h4 className="text-white text-center mt-5">Can't find any guides in that location</h4>
+        <h4 className="text-center mt-5">Can't find any guides in that location</h4>
       }
       {guides[0] !== 'start' && guides.length !== 0 && <GuideList guides={guides} />}
 
-      </div>
+      </Container>
     </div>
   );
 }
