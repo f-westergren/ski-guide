@@ -9,6 +9,7 @@ If you’re a guide you can register and enter information about yourself, and a
 The site will use these APIs:
 
 https://openweathermap.org/
+
 https://developers.google.com/places/web-service/autocomplete
 
 1. I will use React and Node for this project. 
