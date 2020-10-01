@@ -1,7 +1,7 @@
-const getIdFromToken = token => {
+const getFromToken = (token, data) => {
   if (token) {
     try {
-      return JSON.parse(atob(token.split('.')[1])).id
+      return JSON.parse(atob(token.split('.')[1]))[data]
     } catch (error) {
       // ignore
     }
@@ -9,4 +9,4 @@ const getIdFromToken = token => {
   return null;
 }
 
-export default getIdFromToken;
+export default getFromToken;
