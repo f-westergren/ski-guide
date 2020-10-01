@@ -1,4 +1,4 @@
-# Capstone 2 Proposal - Ski Guide App
+# Ski Guide App
 Match yourself with local skiers whenever you’re skiing. Enter skill-level and get matched with a local skier who will show you around the slopes. Could possibly grow into a system where transactions are made too, guides enter how much they charge for a day or half-day, and then a review system as well. 
 
 When you visit the site, you can enter dates and location for your trip, duration for the class, skill level and what type of skiing you want to do. The page will search for guides in that area who are available and the user can request to book them. 
