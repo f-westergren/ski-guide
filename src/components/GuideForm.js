@@ -38,7 +38,7 @@ const GuideForm = () => {
       }
     }
     getGuide();
-  }, [])
+  }, [isGuide, guideId])
   
   const handleChange = e => {
     let { name, value } = e.target
@@ -102,6 +102,7 @@ const GuideForm = () => {
             placeholder="I love skiing..."
             onChange={handleChange}
             value={formData['bio'] || ''}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -111,6 +112,7 @@ const GuideForm = () => {
             id="type"
             multiple 
             onChange={handleChange} 
+            required
           >
             <option value="ski">Ski</option>
             <option value="snowboard">Snowboard</option>

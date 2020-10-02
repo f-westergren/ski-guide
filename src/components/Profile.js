@@ -122,7 +122,7 @@ const Profile = () => {
       </Row>
       <Row>
         <Col>
-          {isUpdating && <Button className="mr-2" onClick={handleSubmit}>Submit</Button>}
+          {isUpdating && <Button className="mr-2" onClick={handleSubmit}>Save Changes</Button>}
           <Button 
             color={isUpdating ? "danger" : "secondary"} 
             onClick={() => setIsUpdating(!isUpdating)}
