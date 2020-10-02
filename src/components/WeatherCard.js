@@ -29,6 +29,14 @@ const WeatherCard = ({ lat, lng }) => {
       </div>
     )
   }
+
+  if (isError) {
+    return (
+      <div className="text-center mt-5">
+        Can't get weather for this location.
+      </div>
+    )
+  }
   return (
     <Card className="mt-2">
       <CardBody>

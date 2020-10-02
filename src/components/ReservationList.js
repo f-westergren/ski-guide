@@ -44,6 +44,8 @@ const ReservationList = () => {
           guide_id={res.guide_id}
           first_name={res.first_name}
           date={res.date}
+          key={res.id}
+          confirmed={res.is_confirmed}
         />
       ))}
     </Container>
