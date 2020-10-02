@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import GuideCard from './GuideCard';
 
 const GuideList = ({ guides }) => {
@@ -11,6 +11,7 @@ const GuideList = ({ guides }) => {
           type={guide.type}
           id={guide.id}
           key={guide.id}
+          location={guide.location}
           rating={guide.avg}
         />
       ))}

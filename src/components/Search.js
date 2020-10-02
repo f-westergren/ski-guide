@@ -11,7 +11,6 @@ const Search = () => {
   const [autoCompleteData, setAutoCompleteData] = useState({})
 
   const addAutoCompleteData = (data) => setAutoCompleteData(data)
-  console.log('COORDINATES')
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -25,7 +24,7 @@ const Search = () => {
 
   return (
     <div className="background">
-            <Row className="mt-5">
+      <Row className="mt-5">
         <Col />
         <Col />
         <Col>
@@ -44,7 +43,7 @@ const Search = () => {
           </Col>
           <Col md={5}>
             <FormGroup>
-              <Input type="date" name="date" id="date" />
+              <Input type="date" name="date" id="date" disabled />
             </FormGroup>
           </Col>
         <Col md={1}>

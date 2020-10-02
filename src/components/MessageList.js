@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Spinner } from 'reactstrap';
-  import SkiGuideApi from '../SkiGuideApi';
-  import { useAuth } from './context/auth';
-  import getFromToken from '../utils';
-  import MessageCard from './MessageCard';
+import SkiGuideApi from '../SkiGuideApi';
+import MessageCard from './MessageCard';
 
 const MessageList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [messages, setMessages] = useState([])
-
-  const { authToken } = useAuth();
-
-  const userId = getFromToken(authToken, 'id')
 
   useEffect(() => {
     const getMessages = async () => {
@@ -26,7 +20,7 @@ const MessageList = () => {
       }
     }
     getMessages()
-  }, [userId])
+  }, [])
   
   if (isLoading) {
     return (

@@ -8,6 +8,7 @@ import Guide from './Guide';
 import Login from './Login';
 import Profile from './Profile'
 import MessageList from './MessageList';
+import FavoriteList from './FavoriteList';
 import { AuthContext } from './context/auth';
 import ReservationList from './ReservationList';
 import GuideForm from './GuideForm';
@@ -35,6 +36,7 @@ const Routes = () => {
             <PrivateRoute exact path="/profile/guide" component={GuideForm} />
             <PrivateRoute exact path="/messages" component={MessageList} />
             <PrivateRoute exact path="/reservations" component={ReservationList} />
+            <PrivateRoute exact path="/favorites" component={FavoriteList} />
             <Route exact path="/login" component={Login} />
             <Route component={NotFound} />
           </Switch>

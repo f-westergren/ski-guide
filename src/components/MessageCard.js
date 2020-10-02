@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardBody } from 'reactstrap';
 import MessageModal from './MessageModal';
 
 const MessageCard = ({ from_id, content, time_stamp, first_name, image_url, sent=true }) => {
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
 
   const dateTime = new Date(time_stamp).toString().slice(0, 24) //Format date and remove timezone
   

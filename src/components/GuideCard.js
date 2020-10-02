@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardBody, CardLink } from 'reactstrap';
 
-const GuideCard = ({ id, first_name, image_url, type, rating }) => {
+const GuideCard = ({ id, first_name, image_url, type, rating, location }) => {
   
   return (
     <Card className="mt-2">
@@ -15,6 +15,7 @@ const GuideCard = ({ id, first_name, image_url, type, rating }) => {
             alt={`${first_name}`} 
           />  
         </h6>
+        <p>Location: {location}</p>
         <p className="text-capitalize">{type.join(', ')}</p>
         <span>{rating ? `Rating: ${rating}/5` : 'No reviews yet'}</span>
       </CardBody>
