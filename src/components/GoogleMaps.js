@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import SkiguideApi from '../SkiGuideApi';
 import PlaceSearch from './PlaceSearch';
 import GuideList from './GuideList';
-import { Button } from 'reactstrap';
 import {
   GoogleMap,
   useLoadScript,
@@ -57,7 +56,6 @@ export default function GoogleMaps() {
     try {
       const result = await SkiguideApi.getGuides();
       setGuides(result.guides);
-      console.log(result.guides)
       setIsLoading(false);
     } catch (err) {
       setIsError(true)
@@ -97,7 +95,7 @@ export default function GoogleMaps() {
         {guides.map(guide => 
           <Marker 
             key={guide.id} 
-            position={{ lat: guide.latitude, lng: guide.longitude }}
+            position={{ lat: guide.lat, lng: guide.lng }}
             icon={{
               url: "/skiguide.svg",
               scaledSize: new window.google.maps.Size(30,30),
@@ -110,7 +108,7 @@ export default function GoogleMaps() {
           />
         )}
 
-        {selected ? (<InfoWindow position={{ lat: selected.latitude, lng: selected.longitude }} onCloseClick={() => {
+        {selected ? (<InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => {
           setSelected(null);
         }}>
           <div>
@@ -132,8 +130,8 @@ function Locate({ panTo }) {
     <button className="locate" onClick={() => {
       navigator.geolocation.getCurrentPosition((position) => 
       panTo({
-        lat: position.coords.latitude, 
-        lng: position.coords.longitude 
+        lat: position.coords.lat, 
+        lng: position.coords.lng 
       }), 
       () => null);
     }}>
