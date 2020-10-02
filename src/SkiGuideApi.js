@@ -78,11 +78,30 @@ class SkiGuideApi {
     return res;
   }
 
-  static async getWeather(lat, lon) {
-    const res = await this.request('weather/today', {lat, lon})
+  static async getFavorites() {
+    const res = await this.request('favorites');
     return res;
   }
 
+  static async getFavorite(guide_id) {
+    const res = await this.request(`favorites/${guide_id}`)
+    return res;
+  }
+
+  static async newFavorite(guide_id) {
+    const res = await this.request('favorites', { guide_id }, 'post')
+    return res;
+  } 
+
+  static async deleteFavorite(id) {
+    const res = await this.request(`favorites/${id}`, {}, 'delete')
+    return res;
+  }
+
+  static async getWeather(lat, lon) {
+    const res = await this.request('weather/today', { lat, lon })
+    return res;
+  }
 }
 
 export default SkiGuideApi;
