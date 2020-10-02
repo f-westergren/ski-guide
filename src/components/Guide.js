@@ -7,20 +7,10 @@ import SkiGuideApi from '../SkiGuideApi';
 const Guide = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [favorite, setFavorite] = useState({});
   const [guide, setGuide] = useState({});
   const [reserved, setReserved] = useState(false)
   const { id } = useParams();
-
-  const getGuide = async () => {
-    try {
-      const result = await SkiGuideApi.getGuide(id);
-      setGuide(result);
-      setIsLoading(false);
-    } catch(err) {
-      setIsError(true);
-      setIsLoading(false);
-    }
-  }
 
   const createNewReservation = async () => {
     try {
@@ -31,9 +21,46 @@ const Guide = () => {
     }
   }
 
+  const addRemoveFavorite = async () => {
+    try {
+      if (Object.keys(favorite).length) {
+        await SkiGuideApi.deleteFavorite(favorite.id)
+        setFavorite({})
+      } else {
+        const result = await SkiGuideApi.newFavorite(id)
+        setFavorite(result)
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    
+  }
+
   useEffect(() => {
-    getGuide();
-  }, []);
+    const fetchGuide = async () => {
+      try {
+        const result = await SkiGuideApi.getGuide(id);
+        setGuide(result);
+        setIsLoading(false);
+      } catch(err) {
+        setIsError(true);
+        setIsLoading(false);
+      }
+    }
+    fetchGuide();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchFavorite = async () => {
+      try {
+        const result = await SkiGuideApi.getFavorite(id);
+        setFavorite(result);
+      } catch (err) {
+        // null
+      }
+    }
+    fetchFavorite();
+  }, [id]);
 
   if (isLoading) {
     return (
@@ -46,7 +73,7 @@ const Guide = () => {
 
   if (isError) {
     return (
-      <div className="text-center mt-5">Ooops. Can't find that guide...</div>
+      <h4 className="text-white text-center mt-5">Can't find that guide.</h4>
     )
   }
 
@@ -59,7 +86,7 @@ const Guide = () => {
           <img 
             className="guide-image" 
             src={guide.image_url || "https://bit.ly/335Iqm0"} 
-            alt="Card image cap" 
+            alt="guide" 
           />
         </Col>
       </Row>
@@ -76,8 +103,9 @@ const Guide = () => {
           <Button 
             className="text-uppercase float-right ml-2"
             id={guide.id}
+            onClick={addRemoveFavorite}
           >
-            Add to favorites
+            {Object.keys(favorite).length ? 'Remove from favorites': 'Add to favorites'}
           </Button>
           <Button
             className="text-uppercase float-right ml-2"
