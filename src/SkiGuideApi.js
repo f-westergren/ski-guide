@@ -77,6 +77,16 @@ class SkiGuideApi {
     const res = await this.request('reservations', data, 'post')
     return res;
   }
+  
+  static async updateReservation(res_id, data) {
+    const res = await this.request(`reservations/${res_id}`, data, 'patch');
+    return res;
+  }
+
+  static async deleteReservation(res_id) {
+    const res = await this.request(`reservations/${res_id}`, {}, 'delete');
+    return res;
+  }
 
   static async getFavorites() {
     const res = await this.request('favorites');
@@ -97,6 +107,7 @@ class SkiGuideApi {
     const res = await this.request(`favorites/${id}`, {}, 'delete')
     return res;
   }
+
 
   static async getWeather(lat, lon) {
     const res = await this.request('weather/today', { lat, lon })
