@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { 
   Container,
   Row, 
@@ -8,8 +9,9 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
    } from 'reactstrap';
+  import DeleteModal from './DeleteModal';
   import SkiGuideApi from '../SkiGuideApi';
   import { useAuth } from './context/auth';
   import getFromToken from '../utils';
@@ -21,7 +23,7 @@ const Profile = () => {
   const [error, setError] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const { authToken } = useAuth();
+  const { authToken, setAuthToken } = useAuth();
   const userId = getFromToken(authToken, 'id');
   const isGuide = getFromToken(authToken, 'is_guide');
   const fields = ['email', 'first_name', 'last_name', 'image_url'];
@@ -46,6 +48,24 @@ const Profile = () => {
       ...data,
       [name]: value
     }))
+  }
+
+  const removeUser = async e => {
+    try {
+      await SkiGuideApi.deleteUser(userId);
+      setAuthToken();
+      return <Redirect to="/" />
+    } catch (err) {
+      setError("Can't remove user right now.")
+    }
+  }
+
+  const removeGuide = async e => {
+    try {
+      await SkiGuideApi.deleteGuide(userId);
+    } catch (err) {
+      setError("Can't unregister right now.")
+    }
   }
 
   const handleSubmit = async e => {
@@ -94,8 +114,7 @@ const Profile = () => {
                   minLength={(i === 'email') ? 5 : 1}                   
                 />
               </FormGroup>
-              )}
-            {error && <span className="text-danger">{error}</span>}          
+              )}         
           </Form>
         :
           <>      
@@ -122,20 +141,29 @@ const Profile = () => {
       </Row>
       <Row>
         <Col>
-          {isUpdating && <Button className="mr-2" onClick={handleSubmit}>Save Changes</Button>}
-          <Button 
+         
+          <Button
+            className="mr-2" 
             color={isUpdating ? "danger" : "secondary"} 
             onClick={() => setIsUpdating(!isUpdating)}
           >
             {isUpdating ? 'Cancel' : 'Edit Profile'}
           </Button>
-          
+          {isUpdating && 
+            <>
+              <Button className="mr-l" onClick={handleSubmit}>Save Changes</Button>
+            </> 
+          }
+          <DeleteModal btnText="Delete User" remove={removeUser} />
+          {isGuide && <DeleteModal btnText="Unregister" remove={removeGuide} className="float-right" />}
           <a className="btn btn-success mr-2 float-right" href="/profile/guide">
             {isGuide ? 'Edit Guide Profile' : 'Become a Guide'}
           </a>
-          
         </Col>
+        
       </Row>
+      {error && <div className="text-danger text-center">{error}</div>} 
+
     </Container>
   )
 }

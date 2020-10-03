@@ -38,6 +38,11 @@ class SkiGuideApi {
     return res;
   }
 
+  static async deleteUser(id) {
+    const res = await this.request(`users/${id}`, {}, 'delete');
+    return res;
+  }
+
   static async getGuide(id) {
     const res = await this.request(`guides/${id}`);
     return res.guide;
@@ -55,6 +60,11 @@ class SkiGuideApi {
 
   static async updateGuide(id, data) {
     const res = await this.request(`guides/${id}`, data, 'patch');
+    return res;
+  }
+
+  static async deleteGuide(id) {
+    const res = await this.request(`guides/${id}`, {}, 'delete');
     return res;
   }
 
