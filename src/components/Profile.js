@@ -62,7 +62,8 @@ const Profile = () => {
 
   const removeGuide = async e => {
     try {
-      await SkiGuideApi.deleteGuide(userId);
+      const res = await SkiGuideApi.deleteGuide(userId);
+      setAuthToken(res.token);
     } catch (err) {
       setError("Can't unregister right now.")
     }

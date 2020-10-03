@@ -23,7 +23,7 @@ const Guide = () => {
       await SkiGuideApi.newReservation({ guide_id: id })
       setReserved(true);
     } catch (err) {
-      setIsError(err);
+      setError("Can't create a new reservation right now.");
     }
   }
 
