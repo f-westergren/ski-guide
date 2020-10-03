@@ -12,7 +12,6 @@ const ReservationList = () => {
     const getReservations = async () => {
       try {
         const result = await SkiGuideApi.getReservations();
-        console.log("RESULT", result);
         setReservations(result);
         setIsLoading(false);
       } catch (err) {
@@ -51,7 +50,7 @@ const ReservationList = () => {
         />
       ))}
       <br />
-      {reservations.asGuide && <h4 className="text-center">Guide Reservations</h4>}
+      {reservations.asGuide.length > 0  && <h4 className="text-center">Guide Reservations</h4>}
       {reservations.asGuide.map(res => (
         <ReservationCard 
           first_name={res.first_name}

@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Col, Row, Button, Spinner} from 'reactstrap';
+import { Container, Col, Row, Button, Spinner, Form} from 'reactstrap';
 import MessageModal from './MessageModal';
 import SkiGuideApi from '../SkiGuideApi';
+import { useAuth } from './context/auth';
+import getFromToken from '../utils';
 
 const Guide = () => {
-  const [isError, setIsError] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [favorite, setFavorite] = useState({});
   const [guide, setGuide] = useState({});
   const [reserved, setReserved] = useState(false)
   const { id } = useParams();
+  const { authToken } = useAuth();
+
+  const user = getFromToken(authToken, 'id');
 
   const createNewReservation = async () => {
     try {
@@ -23,6 +29,7 @@ const Guide = () => {
 
   const addRemoveFavorite = async () => {
     try {
+      setError('');
       if (Object.keys(favorite).length) {
         await SkiGuideApi.deleteFavorite(favorite.id)
         setFavorite({})
@@ -31,7 +38,7 @@ const Guide = () => {
         setFavorite(result)
       }
     } catch (err) {
-      console.log(err);
+      setError("Can't do that right now.");
     }
     
   }
@@ -43,7 +50,7 @@ const Guide = () => {
         setGuide(result);
         setIsLoading(false);
       } catch(err) {
-        setIsError(true);
+        setLoadError(true);
         setIsLoading(false);
       }
     }
@@ -71,7 +78,7 @@ const Guide = () => {
     )
   }
 
-  if (isError) {
+  if (loadError) {
     return (
       <h4 className="text-white text-center mt-5">Can't find that guide.</h4>
     )
@@ -100,6 +107,8 @@ const Guide = () => {
           <li><b>Rating</b>: {guide.avg ? `${guide.avg}/5` : 'No reviews yet'}</li>
         </ul>
           <br />
+        {user && 
+          <>
           <Button 
             className="text-uppercase float-right ml-2"
             id={guide.id}
@@ -116,9 +125,11 @@ const Guide = () => {
             {reserved ? 'Request sent' : 'Request to Book'}
           </Button>
           <MessageModal id={id} btnText='Message' />
+          </>
+        }
         </Col>
-
       </Row>
+      {error && <div className="text-danger text-center">{error}</div>}
   </Container>
   )
 }

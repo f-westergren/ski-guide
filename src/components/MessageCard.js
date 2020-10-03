@@ -14,7 +14,7 @@ const MessageCard = ({ from_id, content, time_stamp, first_name, image_url, sent
           <small>{dateTime}</small> 
           <img className="thumbnail"
             src={image_url || 
-            'https://bit.ly/340DhLe'} 
+            'https://bit.ly/335Iqm0'} 
             height="50px" 
             alt={`${first_name}`} 
           />  

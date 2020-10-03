@@ -3,7 +3,6 @@ import { Card, CardBody, Button } from 'reactstrap';
 import SkiGuideApi from '../SkiGuideApi';
 
 const ReservationCard = ({ id, first_name, date, confirmed, guide }) => {
-  console.log('confirmed', confirmed, id, first_name, date)
   const [isConfirmed, setIsConfirmed] = useState(confirmed);
   const [error, setError] = useState(false);
   const [canceled, setCanceled] = useState(false);
@@ -15,7 +14,6 @@ const ReservationCard = ({ id, first_name, date, confirmed, guide }) => {
       await SkiGuideApi.updateReservation(id, { is_confirmed: true })
       setIsConfirmed(true);
     } catch (err) {
-      console.log(err);
       setError("Can't confirm reservation right now.")
     }
   }
@@ -34,12 +32,13 @@ const ReservationCard = ({ id, first_name, date, confirmed, guide }) => {
   return (
     <Card className='mt-2'>
       <CardBody>
-        <h6>Reservation with {first_name} on {date}</h6>
+        <h6>Reservation with {first_name} on {date.slice(0, 10)}</h6>
+        {!isConfirmed && <small className="font-italic">Awaiting confirmation from Guide</small>}
         <Button 
           className="float-right" 
           color="danger" 
           onClick={cancel} 
-          disabled={canceled}
+          disabled={canceled === 'Reservation canceled'}
         >
           Cancel
         </Button> 

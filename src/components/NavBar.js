@@ -46,7 +46,9 @@ const NavBar = () => {
         </>
           :
         <Nav className="ml-auto">  
-          <NavLink className="float-right" href="/login">Login</NavLink>
+          <NavItem>
+            <NavLink className="float-right" href="/login">Login/Sign Up</NavLink>
+          </NavItem>
         </Nav>
         }
       </Navbar>

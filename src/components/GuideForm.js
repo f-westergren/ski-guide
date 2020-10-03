@@ -38,7 +38,7 @@ const GuideForm = () => {
       }
     }
     getGuide();
-  }, [isGuide, guideId])
+  }, [guideId])
   
   const handleChange = e => {
     let { name, value } = e.target
