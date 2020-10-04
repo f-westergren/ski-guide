@@ -133,13 +133,14 @@ const Profile = () => {
         <Col />
         <Col className="text-center">         
           <img 
-            src={formData.image_url || 'https://bit.ly/340DhLe'} 
+            src={formData.image_url || '/placeholder.jpg'} 
             style={{ borderRadius: '10px' }}
             height="200px" 
             alt='profile'
           />  
         </Col>
       </Row>
+      <br />
       <Row>
         <Col>
          

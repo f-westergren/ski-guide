@@ -10,7 +10,7 @@ const GuideCard = ({ id, first_name, image_url, type, rating, location }) => {
           <span className="text-capitalize">{first_name}</span>
           <img className="thumbnail"
             src={image_url || 
-            'https://bit.ly/340DhLe'} 
+            '/placeholder.jpg'} 
             height="50px" 
             alt={`${first_name}`} 
           />  

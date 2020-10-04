@@ -20,6 +20,7 @@ const Guide = () => {
 
   const createNewReservation = async () => {
     try {
+      setError('');
       await SkiGuideApi.newReservation({ guide_id: id })
       setReserved(true);
     } catch (err) {
@@ -92,7 +93,7 @@ const Guide = () => {
           <br />
           <img 
             className="guide-image" 
-            src={guide.image_url || "https://bit.ly/335Iqm0"} 
+            src={guide.image_url || "/placeholder.jpg"} 
             alt="guide" 
           />
         </Col>

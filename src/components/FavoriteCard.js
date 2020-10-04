@@ -10,7 +10,7 @@ const FavoriteCard = ({ guideId, first_name, image_url, location }) => {
           <span className="text-capitalize">{first_name}</span>
           <img className="thumbnail"
             src={image_url || 
-            'https://bit.ly/335Iqm0'} 
+            '/placeholder.jpg'} 
             height="50px" 
             alt={`${first_name}`} 
           />  

@@ -56,6 +56,7 @@ const MessageList = () => {
         <Row>
         <Col>
           <MessageCard
+            key={message.id}
             content={message.content}
             time_stamp={message.time_stamp}
             first_name={message.first_name}
@@ -73,6 +74,7 @@ const MessageList = () => {
         <Row>
         <Col>
           <MessageCard
+            key={message.id}
             sent={true}
             content={message.content}
             time_stamp={message.time_stamp}
