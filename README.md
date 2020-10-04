@@ -5,6 +5,8 @@ When you visit the site, you enter a location for your trip and page will search
 
 If you’re a guide you can register and enter information about yourself, and availability, in order to be matched with a skier looking for a guide. 
 
+The site is deployed here: https://ski-guide.netlify.app/
+
 ## Data
 The site uses these APIs:
 
