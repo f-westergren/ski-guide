@@ -92,7 +92,7 @@ const Guide = () => {
           <h4>{`${guide.first_name} ${guide.last_name}`}</h4>
           <br />
           <img 
-            className="guide-image" 
+            className="guide-image img-fluid" 
             src={guide.image_url || "/placeholder.jpg"} 
             alt="guide" 
           />
