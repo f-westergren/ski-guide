@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-2 card"
+  >
+    <div
+      class="card-body"
+    >
+      <h6
+        class="d-flex justify-content-between"
+      >
+        <span
+          class="text-capitalize"
+        />
+        <img
+          alt="undefined"
+          class="thumbnail"
+          height="50px"
+          src="/placeholder.jpg"
+        />
+      </h6>
+      <p>
+        Location: 
+      </p>
+    </div>
+    <a
+      class="stretched-link card-link"
+      href="/guides/undefined"
+    />
+  </div>
+</DocumentFragment>
+`;

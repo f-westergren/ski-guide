@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-2 card"
+  >
+    <div
+      class="card-body"
+    >
+      <h6>
+        Reservation with  on 2020-10-01
+      </h6>
+      <small
+        class="font-italic"
+      >
+        Awaiting confirmation from Guide
+      </small>
+      <button
+        class="float-right btn btn-danger"
+        type="button"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
