@@ -72,20 +72,20 @@ const Login = () => {
         <Card>
           <CardBody>
             <Form onSubmit={handleSubmit}>
-              {fields.map((i, idx) => 
+              {fields.map((field, idx) => 
                 <FormGroup key={idx}>
-                  <Label className="font-weight-bold text-capitalize" for={i}>
-                    {(i.indexOf('_') !== -1) ? i.replace('_', ' ') : i}
+                  <Label className="font-weight-bold text-capitalize" for={field}>
+                    {(field.indexOf('_') === -1) ? field : field.replace('_', ' ')}
                   </Label>
                   <Input 
                     className='form-control' 
-                    type={(i === 'password' || i === 'email') ? i : 'text'} 
-                    name={i} 
-                    id={i}
+                    type={(field === 'password' || field === 'email') ? field : 'text'} 
+                    name={field} 
+                    id={field}
                     onChange={handleChange}
-                    value={formData[i]}
-                    minLength={(i === 'password' || i === 'email') ? 5 : 1}
-                    required
+                    value={formData[field]}
+                    minLength={(field === 'password' ||field === 'email') ? 5 : 1}
+                    required={field !== 'image_url'}
                   />
                 </FormGroup>
               )}
