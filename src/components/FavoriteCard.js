@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Card, CardBody, CardLink, Button } from 'reactstrap';
+import React from 'react';
+import { Card, CardBody, CardLink } from 'reactstrap';
 
 const FavoriteCard = ({ guideId, first_name, image_url, location }) => {
 

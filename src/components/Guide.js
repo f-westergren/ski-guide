@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Col, Row, Button, Spinner, Form} from 'reactstrap';
+import { Container, Col, Row, Button, Spinner } from 'reactstrap';
 import MessageModal from './MessageModal';
 import SkiGuideApi from '../SkiGuideApi';
 import { useAuth } from './context/auth';
