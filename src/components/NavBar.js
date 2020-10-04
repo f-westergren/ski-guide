@@ -18,11 +18,16 @@ const NavBar = () => {
     history.push('/');
   }
 
-  return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">SkiGuide</NavbarBrand>
-        {authToken ? <>
+  function loggedOutNav() {
+    return (
+      <Nav className="ml-auto"> 
+        <NavLink className="btn float-right" href="/login">Login/Sign Up</NavLink>
+      </Nav>
+    )
+  }
+  function loggedInNav() {
+    return (
+      <>
         <Nav className="mr-auto" navbar>
           <NavItem>
             <NavLink href="/profile">Profile</NavLink>
@@ -36,24 +41,20 @@ const NavBar = () => {
           <NavItem>
             <NavLink href="/favorites">Favorites</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink href="/about">How to Use</NavLink>
-          </NavItem>
-        </Nav> 
-        <Nav className="ml-auto">  
-        <NavLink className="btn" onClick={logOut}>Logout</NavLink> 
         </Nav>
-        </>
-          :
         <Nav className="ml-auto">  
-          <NavItem>
-            <NavLink className="float-right" href="/login">Login/Sign Up</NavLink>
-          </NavItem>
+          <NavLink className="btn float-right" onClick={logOut}>Logout</NavLink> 
         </Nav>
-        }
-      </Navbar>
-    </div>
-  );
+      </>
+    );
+  }
+
+  return (
+    <Navbar color="light" light expand="md">
+      <NavbarBrand href="/">SkiGuide</NavbarBrand>
+      { authToken ? loggedInNav() : loggedOutNav() }
+    </Navbar>
+  )
 }
 
 export default NavBar;
