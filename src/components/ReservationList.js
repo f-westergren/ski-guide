@@ -38,7 +38,7 @@ const ReservationList = () => {
   return (
     <Container className='profile mt-5 p-4 main-container'>
       <h2 className="text-center">Reservations</h2>
-      {!reservations.asUser && <p className="text-center">You have no reservations :(</p>}
+      {!reservations.asUser.length && <p className="text-center">You have no reservations :(</p>}
       {reservations.asUser.map(res => (
         <ReservationCard 
           first_name={res.first_name}
