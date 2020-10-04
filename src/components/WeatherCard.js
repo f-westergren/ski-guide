@@ -43,8 +43,7 @@ const WeatherCard = ({ lat, lng }) => {
         <h6 className="d-flex justify-content-between">
           <span className="text-capitalize">Current weather in {weather.name} is {weather.weather[0].main}</span>
           <img className="thumbnail"
-            src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png` || 
-            'https://bit.ly/340DhLe'} 
+            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} 
             height="50px" 
             alt={`weather-icon`} 
           />  
