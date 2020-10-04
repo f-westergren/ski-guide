@@ -26,7 +26,7 @@ const Login = () => {
 
   const [formData, setFormData] = useState(initialState);
   const [rSelected, setRSelected] = useState('login');
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState('');
   const { authToken, setAuthToken } = useAuth();
   const history = useHistory();
 
@@ -53,7 +53,7 @@ const Login = () => {
       setAuthToken(res.token);
       history.push('/')  
     } catch(err) {
-      setIsError(true)
+      setError(err)
     }
   }
 
@@ -89,7 +89,7 @@ const Login = () => {
                   />
                 </FormGroup>
               )}
-              {isError && <span className="text-danger">Invalid credentials.</span>}
+              {error && <span className="text-danger">{error}</span>}
               <Button className="float-right" color="primary">Submit</Button>
             </Form>
           </CardBody>
