@@ -52,6 +52,7 @@ const Profile = () => {
 
   const removeUser = async e => {
     try {
+      setError('');
       await SkiGuideApi.deleteUser(userId);
       setAuthToken();
       return <Redirect to="/" />
@@ -62,6 +63,7 @@ const Profile = () => {
 
   const removeGuide = async e => {
     try {
+      setError('');
       const res = await SkiGuideApi.deleteGuide(userId);
       setAuthToken(res.token);
     } catch (err) {
@@ -72,11 +74,11 @@ const Profile = () => {
   const handleSubmit = async e => {
     e.preventDefault()
       try {
-        await SkiGuideApi.updateUser(userId, formData)
-        setIsUpdating(false)
+        setError('');
+        await SkiGuideApi.updateUser(userId, formData);
+        setIsUpdating(false);
       } catch (err) {
-        err[0] === 'Invalid Credentials' ? setError(err[0]) : setError('Invalid or missing input')
-        setTimeout(function(){ setError(false) }, 3000);
+        setError(err);
       }
   }
   
